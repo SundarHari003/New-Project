@@ -1,0 +1,7 @@
+.transparent-back
+{
+    background: rgb(56, 55, 55);
+   background-clip: text;
+    backdrop-filter: blur(2px);
+}
+

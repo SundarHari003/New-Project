@@ -1,8 +1,11 @@
 import React from 'react'
+import DishSlider from './DishSlider'
 
 const HomePage = () => {
   return (
-    <div>HomePage</div>
+    <div>
+      <DishSlider/>
+    </div>
   )
 }
 
