@@ -4,4 +4,8 @@
    background-clip: text;
     backdrop-filter: blur(2px);
 }
+.scroll-bar::-webkit-scrollbar{
+    width: 0;
+    background: transparent;
+}
 

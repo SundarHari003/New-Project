@@ -1,75 +1,82 @@
-import React from 'react';
-import itemDatas from './datas/data';
-import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-import {} from 'react-icons/fa'
-const DishSlider = () => {
-  const arrowStyles = {
-    position: 'absolute',
-    top: '50%',
-    transform: 'translateY(-50%)',
-    width: '40px', // Adjust the width as needed
-    height: '40px', // Adjust the height as needed
-    background: 'black', // Customize the background color and opacity
-    borderRadius: '50%', // Make the button round
-    border: 'none', // Remove the border
-    cursor: 'pointer', // Change cursor to pointer on hover
-    zIndex: '1', // Ensure the arrows appear above the slider
-    
+import React, { useRef, useState, useEffect } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import itemDatas from '../Home/datas/data';
+import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
+
+export default function DishSlider() {
+  const [isBeginning, setIsBeginning] = useState(true);
+  const [isEnd, setIsEnd] = useState(false);
+  const swiperRef = useRef(null);
+
+  const goNext = () => {
+    if (swiperRef.current && swiperRef.current.swiper) {
+      swiperRef.current.swiper.slideNext();
+    }
   };
-  
-  const CustomPrevArrow = (props) => (
-    <button
-      {...props}
-      style={{ ...arrowStyles, left: '-50px' }} // Adjust the left position as needed
-    >
-      &lt; {/* You can use any icon or text for the arrow */}
-    </button>
-  );
-  
-  const CustomNextArrow = (props) => (
-    <button
-      {...props}
-      style={{ ...arrowStyles, right: '-50px' }} // Adjust the right position as needed
-    >
-      &gt; {/* You can use any icon or text for the arrow */}
-    </button>
-  );
-  const settings = {
-    className: 'center',
-    infinite: false,
-    slidesToShow: 8,
-    swipeToSlide: true,
-    nextArrow: <CustomNextArrow />,
-    prevArrow: <CustomPrevArrow />,
-    responsive: [
-      {
-        breakpoint: 1110,
-        settings: {
-          className: 'center',
-          infinite: false,
-          slidesToShow: 6,
-          swipeToSlide: true,
-          nextArrow: <CustomNextArrow />,
-          prevArrow: <CustomPrevArrow />,
-        }
-      }
-    ]
+
+  const goPrev = () => {
+    if (swiperRef.current && swiperRef.current.swiper) {
+      swiperRef.current.swiper.slidePrev();
+    }
   };
+
+  useEffect(() => {
+    if (swiperRef.current && swiperRef.current.swiper) {
+      swiperRef.current.swiper.on('slideChange', () => {
+        setIsBeginning(swiperRef.current.swiper.isBeginning);
+        setIsEnd(swiperRef.current.swiper.isEnd);
+      });
+    }
+  }, []);
 
   return (
-    <div className=' bg-gray-100 bg-opacity-50 lg:px-28 px-2 py-4'>
-      <Slider {...settings}>
-        {itemDatas.map((item, index) => (
-          <div key={index} className={`!flex !justify-center gap-1 items-center ${item.class}  rounded-full text-black bg-white py-2 px-4`}>
-            <img src={item.image} alt='items' width={35}/>
-            <h3>{item.name}</h3>
-          </div>
-        ))}
-      </Slider>
+    <>
+    <div className='bg-gray-100 relative py-5'>
+      <div className="z-10 w-full absolute flex justify-between top-[1.8rem] px-5 lg:px-10">
+        <button onClick={goPrev} disabled={isBeginning} className={`relative left-5 rounded-full shadow shadow-black bg-white hover:bg-gray-200 transition-all duration-300 ${isBeginning ? 'opacity-50 cursor-not-allowed' : ''}`}><MdKeyboardArrowLeft size={30}/></button>
+        <button onClick={goNext} disabled={isEnd} className={`relative right-5 rounded-full shadow shadow-black hover:bg-gray-200 transition-all duration-300 bg-white ${isEnd ? 'opacity-50 cursor-not-allowed' : ''}`}><MdKeyboardArrowRight size={30}/></button>
+      </div>
+      <div className='lg:px-24 px-10'>
+        <Swiper
+          ref={swiperRef}
+          onSlideChange={() => console.log('slide change')}
+          breakpoints={{
+            0: {
+              slidesPerView: 2,
+            },
+            540: {
+              slidesPerView: 3,
+            },
+            790: {
+              slidesPerView: 4,
+            },
+            950: {
+              slidesPerView: 5,
+            },
+            1100: {
+              slidesPerView: 6,
+            },
+            1200: {
+              slidesPerView: 7,
+              spaceBetween: 14
+            }
+          }}
+          className="mySwiper"
+          navigation={false}
+        >
+          {itemDatas.map((item, index) => (
+            <SwiperSlide key={index}>
+              <div className={`flex justify-center gap-4 items-center  rounded-full text-black bg-white py-2 px-4 !cursor-pointer`}>
+                <img src={item.image} alt='items' width={35} className=' !cursor-pointer'/>
+                <h3 className=' !cursor-pointer'>{item.name}</h3>
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>   
+      </div>
     </div>
+    </>
   );
-};
-
-export default DishSlider;
+}

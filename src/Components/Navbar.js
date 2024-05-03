@@ -64,9 +64,9 @@ const Navbar = () => {
         </div>
         {
             (
-                <div className={ `${MenuIcon?'translate-x-full':'translate-x-0'} bg-transparent fixed top-0 w-full z-20 bg-slate-500 transparent-back min-h-screen`}>
+              <div className={ `${MenuIcon?'translate-x-full':'translate-x-0'} bg-transparent fixed top-0 w-full z-20 bg-slate-500 transparent-back min-h-screen`}>
                     <nav className={`${MenuIcon?' w-0 ':' w-3/4 sm:w-2/4  md:w-2/5 lg:w-1/4'} relative duration-300 transition-all  bg-white shadow shadow-slate-700 min-h-screen `}>
-                        <div className=' px-4 py-6 '>
+                        <div className=' px-4 py-6 '> 
                             <FaXmark size={26} onClick={OpenMenu} className=' cursor-pointer'/>
                         </div>
                         <div>
