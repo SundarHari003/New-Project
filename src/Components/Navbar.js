@@ -4,7 +4,7 @@ import { RiArrowDropDownLine} from 'react-icons/ri'
 import { HiShoppingCart } from 'react-icons/hi'
 import { AiOutlineHome, AiOutlineShoppingCart } from 'react-icons/ai'
 import Doordash from '../assests/icons/Doordash.png'
-import  { FaRegUser, FaXmark } from 'react-icons/fa6'
+import  {  FaXmark } from 'react-icons/fa6'
 import {Link} from 'react-router-dom'
 import { MdOutlineLocalOffer } from 'react-icons/md'
 import { BsBagCheck } from 'react-icons/bs'
@@ -15,7 +15,7 @@ const Navbar = () => {
         setMenuIcon(!MenuIcon);
     }
   return (
-    <div className=' w-full flex flex-col items-center  '>
+    <div className=' w-full flex flex-col items-center sticky top-0 bg-white z-[9999]'>
         <nav className=' md:grid grid-cols-[auto,1fr] w-full lg:px-24 py-2  px-2 border-b border-b-gray-300 hidden'>
             <div className=' flex items-center gap-3' >
                 <IoMenuOutline size={26} className=' cursor-pointer' onClick={OpenMenu}/>
@@ -63,9 +63,9 @@ const Navbar = () => {
                     Newyork <RiArrowDropDownLine className=' text-primary cursor-pointer' size={20}/>
         </div>
         {
-            (
-              <div className={ `${MenuIcon?'translate-x-full':'translate-x-0'} bg-transparent fixed top-0 w-full z-20 bg-slate-500 transparent-back min-h-screen`}>
-                    <nav className={`${MenuIcon?' w-0 ':' w-3/4 sm:w-2/4  md:w-2/5 lg:w-1/4'} relative duration-300 transition-all  bg-white shadow shadow-slate-700 min-h-screen `}>
+            (MenuIcon&&
+                <div className={ ` bg-transparent fixed top-0 w-full z-20 bg-slate-500 transparent-back min-h-screen`}>
+                    <nav className={`${MenuIcon?' w-3/4 sm:w-2/4  md:w-2/5 lg:w-1/4':'w-0 '} relative duration-300 transition-all  bg-white shadow shadow-slate-700 min-h-screen `}>
                         <div className=' px-4 py-6 '> 
                             <FaXmark size={26} onClick={OpenMenu} className=' cursor-pointer'/>
                         </div>

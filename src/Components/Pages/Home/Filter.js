@@ -24,7 +24,7 @@ const Filter = () => {
         }));
       };
   return (
-    <div className=' xl:px-24 lg:px-14 px-5  py-6 w-full flex items-center gap-3 overflow-x-auto scroll-bar '>
+    <div className=' xl:px-24 lg:px-14 px-5  py-6 w-full flex items-center gap-3 overflow-x-auto scroll-bar sticky top-[4.5rem] bg-white'>
         <div>
             <div className={`text-base font-semibold flex items-center ${className[1]?"bg-black text-white":"bg-gray-200"} w-[15.7rem] px-3 py-[0.1rem]  rounded-full cursor-pointer hover:bg-gray-50 hover:text-black transition-all duration-200`}>
                 <div className=' flex text-base items-center' onClick={()=>{Active(1)}}>Delivery Fees: Under<TbCurrencyDollar size={17}/><span className='pt-[0.2rem]'>0</span><span className=' w-[0.04rem] h-4 me-2 ms-2 bg-slate-400'></span></div> <MdOutlineKeyboardArrowDown size={17} onClick={OpenFees}/>
