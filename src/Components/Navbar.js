@@ -73,7 +73,7 @@ const Navbar = () => {
                             <Link to="/" className=' flex gap-5 items-end  hover:bg-slate-200 p-4 font-semibold text-xl'><AiOutlineHome size={26} className=' text-gray-800'/>Home</Link><hr/>
                             <Link to="/" className=' flex gap-5 items-end  hover:bg-slate-200 p-4 font-semibold text-xl'><BsBagCheck size={26} className=' text-gray-800'/>Pickup</Link><hr/>
                             <Link to="/" className=' flex gap-5 items-end  hover:bg-slate-200 p-4 font-semibold text-xl'><MdOutlineLocalOffer size={26} className=' text-gray-800 rotate-90'/>Offers</Link><hr/>
-                            <Link to="/" className=' flex gap-5 items-end  hover:bg-slate-200 p-4 font-semibold text-xl'><IoHelpBuoyOutline size={26} className=' text-gray-800'/>Help</Link><hr/>
+                            <Link to="/Help" className=' flex gap-5 items-end  hover:bg-slate-200 p-4 font-semibold text-xl'><IoHelpBuoyOutline size={26} className=' text-gray-800'/>Help</Link><hr/>
                             <Link to="/" className=' flex gap-5 items-end  hover:bg-slate-200 p-4 font-semibold text-xl'><FaRegUserCircle size={26} className=' text-gray-800'/>SignUp or SignIn</Link><hr/>
                         </div>
                     </nav>

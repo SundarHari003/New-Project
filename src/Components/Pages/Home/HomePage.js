@@ -1,13 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
 import DishSlider from './DishSlider'
 import Filter from './Filter'
-import Fooditems from './FoodItems'
+import FoodItems from './FoodItems'
 const HomePage = () => {
+  const[filterDeliveryValue,setfilterDeliveryValue]=useState();
+  const[filterRating,setfilterRating]=useState();
+  const handChangeValue=(value)=>{
+    setfilterDeliveryValue(value);
+  }
+  const handChangeValue2=(value)=>{
+    setfilterRating(value)
+  }
   return (
     <div>
       <DishSlider/>
-      <Filter/>
-      <Fooditems/>
+      <Filter onValueChange={handChangeValue} onValueChange2={handChangeValue2}/>
+      <FoodItems Delivery={filterDeliveryValue} Rating={filterRating}/>
     </div>
   )
 }

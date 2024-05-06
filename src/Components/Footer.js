@@ -1,5 +1,5 @@
 import React from 'react'
-import { FaGooglePay, FaMobileAlt } from 'react-icons/fa'
+import {  FaGooglePlay, FaMobileAlt } from 'react-icons/fa'
 
 const Footer = () => {
   return (
@@ -43,12 +43,12 @@ const Footer = () => {
             </ul>
           </div>
         </div>
-        <div className=' w-full md:w-2/4 font-semibold'>
-          <div className=' text-white bg-gray-600 rounded-lg flex items-center w-fit p-2'>
+        <div className=' w-full md:w-2/4 font-medium flex flex-col gap-3 items-center md:items-end py-7'>
+          <div className=' text-white bg-gray-600 rounded-lg flex items-center w-56 p-2'>
             <FaMobileAlt size={35}/> <div className=' flex flex-col justify-center'><span className=' relative top-2'>Available on</span><span className=' text-[1.5rem] '>App Store</span></div>
           </div>
-          <div>
-            <FaGooglePay/> <div>Available on<span>Google Store</span></div>
+          <div className=' text-white bg-gray-600 rounded-lg flex items-center w-56 p-2'>
+            <FaGooglePlay size={35}/> <div className=' flex flex-col justify-center'><span className=' relative top-2'>Available on</span><span className=' text-[1.5rem]'>Google Store</span></div>
           </div>
         </div>
       </div>
