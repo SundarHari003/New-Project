@@ -6,7 +6,7 @@ const reducerAction=createSlice({
         FoodMenu:fooditems,
     },
     reducers:{
-
+        
     }
 })
 
