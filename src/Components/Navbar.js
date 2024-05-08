@@ -19,10 +19,10 @@ const Navbar = () => {
         <nav className=' md:grid grid-cols-[auto,1fr] w-full lg:px-24 py-2  px-2 border-b border-b-gray-300 hidden'>
             <div className=' flex items-center gap-3' >
                 <IoMenuOutline size={26} className=' cursor-pointer' onClick={OpenMenu}/>
-                <div className=' flex items-center'>
+                <Link to='/Home' className=' flex items-center'>
                     <img src={Doordash} alt="webicon" className=' h-14'/>
                     <h2 className=' tracking-widest text-primary text-xl font-bold cursor-pointer hidden lg:block '>DOORDASH</h2>
-                </div>
+                </Link>
                 <div className=' mx-1'>
                     <button type="button" className=' bg-black text-white  px-3 py-2 font-semibold rounded-full text-sm'>Delivery</button>
                     <button type="button" className=' px-3 font-semibold'>Pickup</button>
@@ -39,13 +39,13 @@ const Navbar = () => {
                     <label for="AllSearch" className=' absolute top-[0.6rem] left-2 px-4'><IoSearchOutline size={26}/></label>
                     <input type="text" name="search" id='AllSearch' placeholder=' Search stores, dishes, products' className=' bg-[#f7f7f7] rounded-full  px-14 py-3  placeholder:font-semibold placeholder:text-[#535353] text-base w-full'/>
                 </div>
-                <div className=' flex items-center gap-2 '>
+                <Link to='/FoodCart' className=' flex items-center gap-2 '>
                     <div className=' font-semibold flex items-center bg-primary rounded-full gap-3 text-white px-3 py-1 cursor-pointer'>
                         <HiShoppingCart size={25}/><span className=' text-base'>0</span>
                     </div>
                     <button className=' font-semibold mx-3 cursor-pointer'>SignIn</button>
                     <button className=' font-semibold bg-gray-300 rounded-full px-3 py-2 cursor-pointer'>SignUp</button>
-                </div>
+                </Link>
             </div>
         </nav>
         <nav className=' md:hidden flex justify-between w-full px-2 py-3 border-b border-b-gray-300'>

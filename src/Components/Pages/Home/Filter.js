@@ -3,8 +3,7 @@ import {  MdLocalOffer, MdOutlineKeyboardArrowDown } from 'react-icons/md';
 import { TiStarFullOutline } from "react-icons/ti";
 import { TbCurrencyDollar } from "react-icons/tb";
 import Dash from '../../../assests/icons/p.png';
-const Filter = ({onValueChange,onValueChange2}) => {
-    const[className,setClassName]=useState({});
+const Filter = () => {
     const[Fees,setFees]=useState(false);
     const[RatingOpen,setRatingOpen]=useState(false);
     const[Price,setPrice]=useState(false);
@@ -28,15 +27,9 @@ const Filter = ({onValueChange,onValueChange2}) => {
     const OpenPrice=()=>{
         setPrice(!Price);
     }
-    const Active = (id) => {
-        setClassName(prevState => ({
-          ...prevState,
-          [id]: !prevState[id]
-        }));
-      };
+    
       const resetbutton=()=>{
-        onValueChange(0)
-        onValueChange2(0)
+      
         setDeliveryFees(3);
         setRating(4.5)
         setrest(false);
@@ -44,8 +37,6 @@ const Filter = ({onValueChange,onValueChange2}) => {
       }
       const calltheDeliveryfees=(event)=>{
         event.preventDefault();
-        onValueChange(DeliveryFees)
-        onValueChange2(Rating)
         setrest(true)
       }
       const handleClickOutside = (event) => {
@@ -70,8 +61,8 @@ const Filter = ({onValueChange,onValueChange2}) => {
   return (
         <div className='scrollable-container xl:px-24 lg:px-14 px-5  py-6 w-full flex items-center gap-3 overflow-x-auto scroll-bar sticky top-[4.5rem] bg-white'>
             <div>
-                <div className={`text-base font-semibold flex items-center ${className[1]?"bg-black text-white":"bg-gray-200"} ${DeliveryFees==7?"w-[16.7rem]":"w-[15.7rem]"} px-3 py-[0.1rem]  rounded-full cursor-pointer hover:bg-gray-50 hover:text-black transition-all duration-200 `}>
-                    <div className=' flex text-base items-center' onClick={()=>{Active(1)}}>Delivery Fees: Under<TbCurrencyDollar size={17}/><span className='pt-[0.2rem]'>{(DeliveryFees==7?"5+":DeliveryFees)}</span><span className=' w-[0.04rem] h-4 me-2 ms-2 bg-slate-400'></span></div> <MdOutlineKeyboardArrowDown size={17} onClick={OpenFees}/>
+                <div className={`text-base font-semibold flex items-center bg-gray-200 ${DeliveryFees==7?"w-[16.7rem]":"w-[15.7rem]"} px-3 py-[0.1rem]  rounded-full cursor-pointer hover:bg-gray-50 hover:text-black transition-all duration-200 `}>
+                    <div className=' flex text-base items-center' >Delivery Fees: Under<TbCurrencyDollar size={17}/><span className='pt-[0.2rem]'>{(DeliveryFees==7?"5+":DeliveryFees)}</span><span className=' w-[0.04rem] h-4 me-2 ms-2 bg-slate-400'></span></div> <MdOutlineKeyboardArrowDown size={17} onClick={OpenFees}/>
                 </div> 
                 {
                     (
@@ -101,14 +92,14 @@ const Filter = ({onValueChange,onValueChange2}) => {
                     )
                 } 
             </div>
-            <div className={`text-base font-semibold flex items-center ${className[2]?"bg-black text-white":"bg-gray-200"} w-fit px-3 py-[0.2rem]  rounded-full cursor-pointer hover:bg-gray-50 hover:text-black transition-all duration-200`} onClick={()=>{Active(2)}}>
+            <div className={`text-base font-semibold flex items-center bg-gray-200 w-fit px-3 py-[0.2rem]  rounded-full cursor-pointer hover:bg-gray-50 hover:text-black transition-all duration-200`}>
                 <MdLocalOffer size={17} className=' rotate-90'/> <span className=' text-base'>Offers</span>
             </div>
-            <div className={`py-[0.2rem] font-semibold flex items-center w-fit px-3 rounded-full cursor-pointer hover:bg-gray-50 transition-all duration-200 hover:text-black ${className[3]?"bg-black text-white":"bg-gray-200"}`} onClick={()=>{Active(3)}}>
+            <div className={`py-[0.2rem] font-semibold flex items-center w-fit px-3 rounded-full cursor-pointer hover:bg-gray-50 transition-all duration-200 hover:text-black bg-gray-200`} >
                 <span className=' text-base'>Pickup</span>
             </div>
             <div className=' relative'>
-                <div className={` text-base font-semibold flex items-center py-[0.1rem] hover:text-black w-fit px-3 rounded-full cursor-pointer hover:bg-gray-50 transition-all duration-200 gap-1 ${className[4]?"bg-black text-white":"bg-gray-200"}`} onClick={()=>{Active(4)}}>
+                <div className={` text-base font-semibold flex items-center py-[0.1rem] hover:text-black w-fit px-3 rounded-full cursor-pointer hover:bg-gray-50 transition-all duration-200 gap-1 bg-gray-200`} >
                     Over<span className='pt-[0.2rem]'>{Rating}</span><TiStarFullOutline size={17}/><span className=' w-[0.04rem] h-4 me-2 bg-slate-400'></span> <MdOutlineKeyboardArrowDown size={17} onClick={OpenRating}/>
                 </div>
                 {
@@ -135,11 +126,11 @@ const Filter = ({onValueChange,onValueChange2}) => {
                     )
                 } 
             </div>
-            <div className={`font-semibold flex items-center min-w-[8.3rem] px-3  py-[0.2rem] rounded-full cursor-pointer hover:bg-gray-50 transition-all duration-200 ${className[5]?"bg-black text-white":"bg-gray-200"} hover:text-black`} onClick={()=>{Active(5)}}>
+            <div className={`font-semibold flex items-center min-w-[8.3rem] px-3  py-[0.2rem] rounded-full cursor-pointer hover:bg-gray-50 transition-all duration-200 bg-gray-200 hover:text-black`} >
                 <span className=' text-base'>Under 30 min</span>
             </div>
             <div>
-                <div className={` font-semibold flex items-center w-fit px-3 py-[0.2rem] rounded-full cursor-pointer hover:bg-gray-50 transition-all duration-200 gap-2 ${className[6]?"bg-black text-white":"bg-gray-200"} hover:text-black`} onClick={()=>{Active(6)}}>
+                <div className={` font-semibold flex items-center w-fit px-3 py-[0.2rem] rounded-full cursor-pointer hover:bg-gray-50 transition-all duration-200 gap-2 bg-gray-200 hover:text-black`} >
                     <span className=' text-base'>Price</span> <MdOutlineKeyboardArrowDown size={17} onClick={OpenPrice}/>
                 </div>
                 {
@@ -166,7 +157,7 @@ const Filter = ({onValueChange,onValueChange2}) => {
                     )
                 } 
             </div>
-            <div className={`font-semibold flex items-center min-w-[8.9rem] px-3 py-[0.2rem] rounded-full cursor-pointer hover:bg-gray-50 transition-all duration-200 gap-2 ${className[7]?"bg-black text-white":"bg-gray-200"} hover:text-black `}onClick={()=>{Active(7)}}>
+            <div className={`font-semibold flex items-center min-w-[8.9rem] px-3 py-[0.2rem] rounded-full cursor-pointer hover:bg-gray-50 transition-all duration-200 gap-2 bg-gray-200 hover:text-black `}>
                 <img src={Dash} alt="icons" width={25}/>
                 <span className=' text-base'>DashPass</span>
             </div>

@@ -9,3 +9,14 @@
     background: transparent;
 }
 
+.animation-toast{
+    animation: toasts 1s linear 0s 1 alternate both;
+}
+@keyframes toasts {
+    from{
+        width: 0%;
+    }
+    to{
+        width: 100%;
+    }
+}
