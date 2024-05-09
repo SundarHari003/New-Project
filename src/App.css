@@ -20,3 +20,17 @@
         width: 100%;
     }
 }
+
+.MenuNav{
+    animation: Navbar 0.8s linear 0s 1 alternate both;
+    position: relative;
+}
+@keyframes Navbar {
+    from{
+        left: -1000px;
+    }
+    to{
+        left: 0px;
+    }
+    
+}

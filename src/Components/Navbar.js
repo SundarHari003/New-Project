@@ -9,7 +9,9 @@ import {Link} from 'react-router-dom'
 import { MdOutlineLocalOffer } from 'react-icons/md'
 import { BsBagCheck } from 'react-icons/bs'
 import { FaRegUserCircle } from 'react-icons/fa'
+import { useSelector } from 'react-redux'
 const Navbar = () => {
+    const{foodcart}=useSelector((state)=>state.reducerAction);
     const[MenuIcon,setMenuIcon]=useState(false);
     const OpenMenu=()=>{
         setMenuIcon(!MenuIcon);
@@ -41,7 +43,7 @@ const Navbar = () => {
                 </div>
                 <Link to='/FoodCart' className=' flex items-center gap-2 '>
                     <div className=' font-semibold flex items-center bg-primary rounded-full gap-3 text-white px-3 py-1 cursor-pointer'>
-                        <HiShoppingCart size={25}/><span className=' text-base'>0</span>
+                        <HiShoppingCart size={25}/><span className=' text-base'>{foodcart.length}</span>
                     </div>
                     <button className=' font-semibold mx-3 cursor-pointer'>SignIn</button>
                     <button className=' font-semibold bg-gray-300 rounded-full px-3 py-2 cursor-pointer'>SignUp</button>
@@ -65,7 +67,7 @@ const Navbar = () => {
         {
             (MenuIcon&&
                 <div className={ ` bg-transparent fixed top-0 w-full z-20 bg-slate-500 transparent-back min-h-screen`}>
-                    <nav className={`${MenuIcon?' w-3/4 sm:w-2/4  md:w-2/5 lg:w-1/4':'w-0 '} relative duration-300 transition-all  bg-white shadow shadow-slate-700 min-h-screen `}>
+                    <nav className={` w-3/4 sm:w-2/4  md:w-2/5 lg:w-1/4 MenuNav  relative duration-300 transition-all  bg-white shadow shadow-slate-700 min-h-screen `}>
                         <div className=' px-4 py-6 '> 
                             <FaXmark size={26} onClick={OpenMenu} className=' cursor-pointer'/>
                         </div>

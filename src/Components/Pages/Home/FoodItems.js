@@ -1,14 +1,41 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { FaDollarSign, FaStar } from 'react-icons/fa';
 import fooditems from './datas/Food-data';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import {AddItemsCar} from '../../Redux-Data/Reducer'
+import { useDispatch, useSelector } from 'react-redux';
 const FoodItems = () => {
-  const [showToast, setShowToast] = useState(false);
-
   
-  const notify=()=>{toast.success("Your Food items added on Cart...", {
+  const dispatch=useDispatch();
+  const{toasting}=useSelector((state)=>state.reducerAction);
+  const addOncart=(fooditem)=>{
+    const Foodlist={
+      id:fooditem.id,
+      Image:fooditem.Image,
+      Name:fooditem.Name,
+      KeyName:fooditem.KeyName,
+      Price:fooditem.Price,
+      Deliveryfees:fooditem.Deliveryfees,
+      Minutes:fooditem.minutes,
+      InitialPrice:fooditem.InitialPrice,
+      Quantity:1,
+    }
+    dispatch(AddItemsCar(Foodlist));
+  }
+  
+  const notify=(fooditem)=>{
+    toasting?
+    toast.warn("This Item Already Added on Cart", {
+      position: "top-right",
+      autoClose: 1500,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    }):
+    toast.success("Your Food items added on Cart...", {
     position: "top-right",
     autoClose: 1500,
     hideProgressBar: false,
@@ -16,13 +43,16 @@ const FoodItems = () => {
     pauseOnHover: true,
     draggable: true,
     progress: undefined,
-  })};
+  })
+  
+  addOncart(fooditem);
+};
   return (
     <div className='lg:px-24 px-2 grid grid-cols-3 gap-6'>
       {fooditems.map((fooditem) => (
         <div key={fooditem.id} className='rounded-xl p-1 shadow-black hover:shadow-xl cursor-pointer'>
-          <img src={fooditem.Image} alt="FoodMenu" className='rounded-xl h-60 pb-2' />
-          <div className='grid grid-cols-2'>
+          <img src={fooditem.Image} alt="FoodMenu" className='rounded-xl h-60  w-full' />
+          <div className='grid grid-cols-[1fr,auto]'>
             <div className='flex flex-col'>
               <h4 className='text-lg font-semibold'>{fooditem.Name}</h4>
               <div className='text-gray-500 flex items-center gap-2 font-medium'>
@@ -37,7 +67,7 @@ const FoodItems = () => {
               </div>
             </div>
             <div className='flex justify-end items-center mx-5'>
-              <button onClick={notify} className="bg-primary hover:opacity-75 text-white font-semibold py-1 px-5 rounded-full text-xl">
+              <button onClick={()=>{notify(fooditem)}} className="bg-primary hover:opacity-75 text-white font-semibold py-1 px-5 rounded-full text-xl">
                 Add
               </button>
             </div>
