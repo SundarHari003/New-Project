@@ -1,5 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 import fooditems from '../Pages/Home/datas/Food-data';
+const getTotalPrice = (foodcart) => {
+    let totalPrice = 0;
+    foodcart.forEach((item) => {
+        totalPrice += item.Price;
+    });
+    return totalPrice;
+};
+
 const reducerAction = createSlice({
     name: "FoodItemMenu",
     initialState: {
@@ -17,7 +25,7 @@ const reducerAction = createSlice({
                     state.foodcart=[...state.foodcart,action.payload];
                 }
             existingIndex === -1?state.toasting=false:state.toasting=true;
-            state.totalCartAmount=state.foodcart.map((item)=>(state.totalCartAmount+item.Price));
+            state.totalCartAmount=getTotalPrice(state.foodcart);
         },
         IncreaseFoodQuantity: (state, action) => {
             state.foodcart = state.foodcart.map((item) => {
@@ -33,7 +41,7 @@ const reducerAction = createSlice({
                     return item; 
                 }
             });
-            state.totalCartAmount=state.foodcart.map((item)=>(state.totalCartAmount+item.Price));
+            state.totalCartAmount=getTotalPrice(state.foodcart);
         },     
         DecreaseFoodQuantity: (state, action) => {
             state.foodcart = state.foodcart.map((item) => {
@@ -52,6 +60,7 @@ const reducerAction = createSlice({
                     return item;
                 }
             });
+            state.totalCartAmount=getTotalPrice(state.foodcart);
         }
         
     }

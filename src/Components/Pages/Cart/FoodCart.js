@@ -73,7 +73,7 @@ const FoodCart = () => {
           <hr/>
           <div className=' flex justify-between items-center px-10 py-9'>
             <div className=' flex'>
-              <span className=' flex text-2xl font-medium items-center'>Total:<MdCurrencyRupee size={25} className=' text-primary'/>{total}</span>
+              <span className=' flex text-2xl font-medium items-center'>Total:<MdCurrencyRupee size={25} className=' text-primary'/>{totalCartAmount}</span>
             </div>
             <button type="submit" className=' text-2xl text-white bg-primary rounded-full px-3 py-1 hover:opacity-90'>Order Now</button>
           </div>
