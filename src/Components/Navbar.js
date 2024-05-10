@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import { IoHelpBuoyOutline, IoMenuOutline, IoSearchOutline } from 'react-icons/io5'
 import { RiArrowDropDownLine} from 'react-icons/ri'
 import { HiShoppingCart } from 'react-icons/hi'
@@ -13,9 +13,31 @@ import { useSelector } from 'react-redux'
 const Navbar = () => {
     const{foodcart}=useSelector((state)=>state.reducerAction);
     const[MenuIcon,setMenuIcon]=useState(false);
+    const[OpenLogin,setOpenLogin]=useState(false);
     const OpenMenu=()=>{
         setMenuIcon(!MenuIcon);
     }
+    const sign=()=>{
+        setOpenLogin(!OpenLogin);
+    }
+    const [textanime,setanime]=useState(false)
+    const anime1=()=>{
+        setanime(true)
+    }
+    useEffect(()=>{
+        
+         if (textanime) {
+            const label=document.getElementById("UserName");
+            const word=label.innerHTML;
+            const characters = word.split('');
+            characters.forEach((char,index)=>{
+            const span=document.createElement('span');
+            span.textContent=char;
+            span.style.transitionDelay = `${index * 50}ms`;
+            label.appendChild(span);
+        })
+         }   
+    },[textanime])
   return (
     <div className=' w-full flex flex-col items-center sticky top-0 bg-white z-[9999]'>
         <nav className=' md:grid grid-cols-[auto,1fr] w-full lg:px-24 py-2  px-2 border-b border-b-gray-300 hidden'>
@@ -41,19 +63,19 @@ const Navbar = () => {
                     <label for="AllSearch" className=' absolute top-[0.6rem] left-2 px-4'><IoSearchOutline size={26}/></label>
                     <input type="text" name="search" id='AllSearch' placeholder=' Search stores, dishes, products' className=' bg-[#f7f7f7] rounded-full  px-14 py-3  placeholder:font-semibold placeholder:text-[#535353] text-base w-full'/>
                 </div>
-                <Link to='/FoodCart' className=' flex items-center gap-2 '>
-                    <div className=' font-semibold flex items-center bg-primary rounded-full gap-3 text-white px-3 py-1 cursor-pointer'>
+                <div className=' flex items-center gap-2 '>
+                    <Link to='/FoodCart' className=' font-semibold flex items-center bg-primary rounded-full gap-3 text-white px-3 py-1 cursor-pointer'>
                         <HiShoppingCart size={25}/><span className=' text-base'>{foodcart.length}</span>
-                    </div>
-                    <button className=' font-semibold mx-3 cursor-pointer'>SignIn</button>
-                    <button className=' font-semibold bg-gray-300 rounded-full px-3 py-2 cursor-pointer'>SignUp</button>
-                </Link>
+                    </Link>
+                    <button className=' font-semibold mx-3 cursor-pointer' onClick={sign}>SignIn</button>
+                    <button className=' font-semibold bg-gray-300 rounded-full px-3 py-2 cursor-pointer' onClick={sign}>SignUp</button>
+                </div>
             </div>
         </nav>
         <nav className=' md:hidden flex justify-between w-full px-2 py-3 border-b border-b-gray-300'>
             <div className=' flex gap-3 items-center ps-5'>
                 <IoMenuOutline size={26} className=' cursor-pointer' onClick={OpenMenu}/>
-                <AiOutlineShoppingCart size={26} className=' cursor-pointer'/>
+               <Link to='/FoodCart'><AiOutlineShoppingCart size={26} className=' cursor-pointer'/></Link>
                 <IoSearchOutline size={26} className=' cursor-pointer'/>
             </div>
             <div className=' flex gap-3 items-center'>
@@ -79,6 +101,28 @@ const Navbar = () => {
                             <Link to="/" className=' flex gap-5 items-end  hover:bg-slate-200 p-4 font-semibold text-xl'><FaRegUserCircle size={26} className=' text-gray-800'/>SignUp or SignIn</Link><hr/>
                         </div>
                     </nav>
+                </div>
+            )
+        }
+        {
+            (OpenLogin&&
+                <div className=' min-h-screen bg-black bg-opacity-50 absolute flex justify-center p-8 top-0 w-full z-[9999]'>
+                    <div className=' w-full  md:w-3/4 lg:w-2/4 sign-blur'>
+                        <div className=' p-5'>
+                            <FaXmark size={32} onClick={sign} className=' cursor-pointer'/>
+                        </div>
+                        <h1 className=' text-3xl font-semibold text-center text-primary pb-5'>Sign In</h1><hr/>
+                        <form className=' flex items-center justify-center flex-col w-full p-10 '>
+                            <div className='form-control'>
+                                <label for="Name" id="UserName">UserName</label>
+                                <input type="text" name="Name" id='Name'onClick={anime1}/>
+                            </div>
+                            <div className='form-control'>
+                                <label for="Pass" id="Password">Password</label>
+                                <input type="password" name="Name" id='Pass'/>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             )
         }

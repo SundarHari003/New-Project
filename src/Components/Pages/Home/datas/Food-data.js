@@ -147,7 +147,7 @@ const fooditems=[
         miles:0.1,
         minutes:39,
         Image:food9,
-        keyName:"breakfast",
+        keyName:"Dessert",
         Deliveryfees:2,
         Price:100,
         InitialPrice:100,
@@ -311,7 +311,7 @@ const fooditems=[
     },
     {
         id:22,
-        Name:"los mejores Cupcakes cerca de Tribeca",
+        Name:"los mejores Cupcakes",
         Rating:4.5,
         miles:0.4,
         minutes:19,
@@ -338,7 +338,7 @@ const fooditems=[
 
     {
         id:24,
-        Name:"Oakberry Acai Bowls & Smoothies",
+        Name:"Oakberry Acai Smoothies",
         Rating:3.5,
         miles:1.1,
         minutes:35,
