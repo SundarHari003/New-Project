@@ -68,48 +68,43 @@ border: 1px solid rgba(255, 255, 255, 0.33);
 
   .form-control {
     position: relative;
-    margin: 20px;
+    margin: 5px 20px;
     width: 100%;
-    
   }
   
   .form-control input {
     background-color: transparent;
     border: 0;
-    border-bottom: 2px #fff solid;
+    border-bottom: 2px white solid;
     display: block;
     width: 100%;
-    padding: 15px 0;
-    font-size: 18px;
-    color: rgba(0, 0, 0, 0.788);
+    padding-top:30px ;
+    font-size: 25px;
+    color: #fff;
   }
   
   .form-control input:focus,
   .form-control input:valid {
     outline: 0;
-    border-bottom-color:#fff;
   }
   
   .form-control label {
     position: absolute;
-    top: 20px;
-    font-weight: bold;
+    top: 15px;
     left: 0;
-    font-size: 2rem;
     pointer-events: none;
-    color: #fff;
   }
   
   .form-control label span {
     display: inline-block;
-    font-size: 18px;
+    font-size: 30px;
     min-width: 5px;
-    color: #fff;
     transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   }
-  
-  .form-control input:focus+label span,
-  .form-control input:valid+label span {
-    color: #eb1700;
-    transform: translateY(-30px);
+  .new-glass-design
+  {
+    backdrop-filter: blur(0px) saturate(200%);
+    -webkit-backdrop-filter: blur(0px) saturate(200%);
+    background-color: rgba(0, 0, 0, 0.308);
+    border: 1px solid rgba(209, 213, 219, 0.3);
   }
