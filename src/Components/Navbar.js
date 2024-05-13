@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState,useRef,useEffect } from 'react'
 import { IoHelpBuoyOutline, IoMenuOutline, IoSearchOutline } from 'react-icons/io5'
 import { RiArrowDropDownLine} from 'react-icons/ri'
 import { HiShoppingCart } from 'react-icons/hi'
@@ -16,9 +16,10 @@ const Navbar = () => {
     const[MenuIcon,setMenuIcon]=useState(false);
     const[OpenLogin,setOpenLogin]=useState(false);
     const[signing,setsigning]=useState(false);
+   
+    
     const OpenMenu=()=>{
-        setMenuIcon(!MenuIcon);
-    }
+        setMenuIcon(!MenuIcon);}
     const sign=(value)=>{
         value?setsigning(false):setsigning(true);
         setOpenLogin(!OpenLogin);
@@ -53,6 +54,18 @@ const Navbar = () => {
        }
     }
     
+    const dropdownRef =useRef(null);
+    const handleClickOutside = (event) => {
+        if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+            setOpenLogin(true);
+        }
+      };
+    useEffect(() => {
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+          document.removeEventListener("mousedown", handleClickOutside);
+        };
+      }, []);
   return (
     <div className=' w-full flex flex-col items-center sticky top-0 bg-white z-[9999]'>
         <nav className=' md:grid grid-cols-[auto,1fr] w-full lg:px-24 py-2  px-2 border-b border-b-gray-300 hidden'>
@@ -121,14 +134,14 @@ const Navbar = () => {
         }
         {
             (OpenLogin&&
-                <div className=' min-h-screen bg-black bg-opacity-50 absolute flex justify-center p-8 top-0 w-full z-[9999]'>
+                <div className=' min-h-screen bg-black bg-opacity-50 absolute flex justify-center p-8 top-0 w-full z-[9999]' onClick={(event)=>{handleClickOutside(event)}} ref={dropdownRef}>
                     <div className=' w-full  md:w-3/4 xl:w-2/4 sign-blur overflow-auto'>
                         <div className=' p-5'>
                             <FaXmark size={32} onClick={sign} className=' cursor-pointer'/>
                         </div>
                         <div className=' flex'>
-                            <h1 className={` text-3xl font-semibold  ms-5 ps-1 text-primary py-3 px-10 w-2/4 text-center ${signing?"new-glass-design":" "} rounded-2xl`} onClick={()=>signs(0)}>Sign In</h1>
-                            <h1 className={` text-3xl font-semibold  me-5 ps-1 text-primary py-3 px-10 w-2/4 text-center ${signing?"":"new-glass-design"} rounded-2xl`} onClick={()=>signs(1)}>Sign Up</h1>
+                            <h1 className={` text-3xl font-semibold  ms-5 ps-1 text-primary py-3 cursor-pointer px-10 w-2/4 text-center ${signing?"new-glass-design":" "} rounded-2xl`} onClick={()=>signs(0)}>Sign In</h1>
+                            <h1 className={` text-3xl font-semibold  me-5 ps-1 text-primary py-3 cursor-pointer px-10 w-2/4 text-center ${signing?"":"new-glass-design"} rounded-2xl`} onClick={()=>signs(1)}>Sign Up</h1>
                         </div>
                         {
                             signing?
@@ -180,16 +193,95 @@ const Navbar = () => {
                             </div>
                         </div>
                         :
-                        <div className=' mx-5 rounded-lg'>
-                            <form className=' grid grid-cols-2 w-full  h-full px-10 '>
-                               <div className=' relative'>
-                                <input type="text" name="name" required/>
-                                <label for="firstName">First Name</label>
+                        <div className=' mx-5 rounded-lg  new-glass-design'>
+                            <form className=' grid grid-cols-2 gap-8 w-full  h-full px-10 py-5'>
+                               <div className=' relative pt-8 w-full grid col-span-2 md:col-span-1'>
+                                <input type="text" name="firstname" id='firstname' required className=' bg-transparent border-b-2 border-b-white w-full focus:outline-none' />
+                                <label for="firstName" className={` absolute top-0 left-0 text-lg text-white `}>
+                                    {
+                                        "First Name".split('').map((letter,i)=>(
+                                                <span style={{transitionDelay:`${i*50}ms` }} className=' text-xl' >{letter}</span>
+                                            ))
+                                        }
+                                </label>
                                </div>
-                               <div className=' relative'>
-                                <input type="text" name="name" required/>
-                                <label for="firstName">First Name</label>
+                               <div className=' relative pt-0 md:pt-8 w-full grid col-span-2 md:col-span-1'>
+                                <input type="text" name="Lastname" id='lastname' required className=' bg-transparent border-b-2 border-b-white w-full focus:outline-none'/>
+                                <label htmlFor="lastName" className=' absolute top-0 left-0 text-lg text-white '>
+                                    {
+                                        "Last Name".split('').map((letter,i)=>(
+                                                <span style={{transitionDelay:`${i*50}ms` }} className=' relative text-xl ' >{letter}</span>
+                                            ))
+                                        }
+                                </label>
                                </div>
+                               <div className=' relative grid col-span-2'>
+                                <input type="email" name="name" required className=' bg-transparent border-b-2 border-b-white w-full focus:outline-none' />
+                                <label htmlFor="firstName" className=' absolute -top-7 left-0 text-lg text-white'>
+                                    {
+                                        "Email".split('').map((letter,i)=>(
+                                                <span style={{transitionDelay:`${i*50}ms` }} className={`relative  text-[1.25rem] text-white`}>{letter}</span>
+                                            ))
+                                        }
+                                </label>
+                               </div>
+                               <div className=' grid col-span-2 md:col-span-1 w-full'>
+                                <div className=' relative flex gap-3 w-full'>
+                                    <select className=' bg-transparent border-2 border-white rounded-lg text-white focus:outline-none'>
+                                        <option selected devalue="india" className='bg-black bg-opacity-10 border-2 text-center'>+91</option>
+                                        <option value="USA" className='bg-black bg-opacity-10 border-2 text-center'>+1</option>
+                                        <option value="UK" className='bg-black bg-opacity-10 border-2 text-center'>+44</option>
+                                        <option value="UAE" className='bg-black bg-opacity-10 border-2 text-center'>+971</option>
+                                        <option value="Korea" className='bg-black bg-opacity-10 border-2 text-center'>+82</option>
+                                    </select>
+                                    <input type="number" name="name" id='number' required className=' bg-transparent border-b-2 border-b-white w-full' />
+                                    <label for="number" className=' absolute -top-7 left-[4.4rem] text-lg text-white'>
+                                        {
+                                            "Phone Number".split('').map((letter,i)=>(
+                                                    <span style={{transitionDelay:`${i*50}ms` }} className=' text-[1.25rem] text-white'>{letter}</span>
+                                                ))
+                                            }
+                                    </label>
+                                </div>
+                               </div>
+                               <div className=' grid col-span-2 md:col-span-1 w-full'>
+                                    <div className=' relative flex gap-3 w-full'>
+                                    <select className='bg-transparent border-b-2 border-b-white text-white focus:outline-none text-xl w-full text-center'>
+                                        <option selected disabled className='bg-black bg-opacity-10 border-2 text-center'>State</option>
+                                        <option value="Tamil Nadu" className='bg-black bg-opacity-10 border-2 text-center'>Tamil Nadu</option>
+                                        <option value="Kerala" className='bg-black bg-opacity-10 border-2 text-center'>Kerala</option>
+                                        <option value="Bangalore" className='bg-black bg-opacity-10 border-2 text-center'>Bangalore</option>
+                                        <option value="Andra Pradesh" className='bg-black bg-opacity-10 border-2 text-center'>Andra Pradesh</option>
+                                    </select>
+
+                                        </div>
+                               </div>
+                                <div className=' relative grid col-span-2'>
+                                    <input type="Password" name="name" id='number' required className=' bg-transparent border-b-2 border-b-white w-full focus:outline-none'/>
+                                    <label for="number" className=' absolute -top-7 left-0 text-lg text-white'>
+                                        {
+                                            "Create Password".split('').map((letter,i)=>(
+                                                    <span style={{transitionDelay:`${i*50}ms` }} className=' text-[1.25rem] text-white'>{letter}</span>
+                                                ))
+                                            }
+                                    </label>
+                                </div>
+                                <div className=' relative grid col-span-2'>
+                                    <input type="Password" name="name" id='number' required className=' bg-transparent border-b-2 border-b-white w-full focus:outline-none' />
+                                    <label for="number" className=' absolute -top-7 left-0 text-lg text-white'>
+                                        {
+                                            "Current Password".split('').map((letter,i)=>(
+                                                    <span style={{transitionDelay:`${i*50}ms` }} className=' text-[1.25rem] text-white'>{letter}</span>
+                                                ))
+                                            }
+                                    </label>
+                                </div>
+                                <div className=' gird col-span-2'>
+                                <button type="submit" className=' w-full text-2xl font-semibold bg-primary  py-3 rounded-xl text-white hover:opacity-75 transition-all duration-300'>Sign Up</button>
+                                </div>
+                                <div className=' grid col-span-2 justify-items-center'>
+                                    <span className=' text-lg text-white flex items-center gap-1'>Already have account ? <a href='#' className=' text-blue-700'>SignIn</a> </span>
+                                </div>
                             </form>
                             
                         </div>

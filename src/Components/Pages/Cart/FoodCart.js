@@ -4,6 +4,7 @@ import { FaMinus, FaPlus } from 'react-icons/fa6';
 import { MdCurrencyRupee, MdDeleteForever} from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
 import {IncreaseFoodQuantity,DecreaseFoodQuantity,DeleteList} from '../../Redux-Data/Reducer'
+import { Link } from 'react-router-dom';
 const FoodCart = () => {
   const {foodcart}=useSelector((state)=>state.reducerAction);
   const {totalCartAmount}=useSelector((state)=>state.reducerAction);
@@ -74,6 +75,9 @@ const FoodCart = () => {
             <div className=' flex'>
               <span className=' flex text-lg sm:text-2xl font-medium items-center'>Total:<MdCurrencyRupee size={25} className=' text-primary'/>{totalCartAmount}</span>
             </div>
+            <Link to="/Home" className=' bg-gray-300 font-bold text-lg md:flex items-center px-5 py-2 rounded-full gap-2 hidden'>
+              <FaPlus size={20} className=' rounded-full border border-black'/><span className=' text-lg'>Add More Items</span>
+            </Link>
             <button type="submit" className=' text-lg sm:text-2xl text-white bg-primary rounded-full px-3 py-1 hover:opacity-90'>Order Now</button>
           </div>
         </div>
