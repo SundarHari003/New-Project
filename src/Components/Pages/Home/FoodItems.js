@@ -4,10 +4,11 @@ import fooditems from './datas/Food-data';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {AddItemsCar} from '../../Redux-Data/Reducer'
-import { useDispatch} from 'react-redux';
+import { useDispatch, useSelector} from 'react-redux';
 import FoodsSlider from './Layout/FoodsSlider';
 const FoodItems = () => {
-  
+  const{FilterButton} =useSelector((state)=>state.reducerAction);
+  const{tempfoodMenu}=useSelector((state)=>state.reducerAction);
   const dispatch=useDispatch();
   const addOncart=(fooditem)=>{
     const Foodlist={
@@ -31,16 +32,10 @@ const FoodItems = () => {
   const Desserts=fooditems.filter(fooditem=>fooditem.keyName==="Dessert");
   return (
     <div>
-      <div>
-        <FoodsSlider title="Under $1 Delivery Fees" filtered={Delivery}/>
-        <FoodsSlider title="Quick Deliveries" filtered={QuickDelivery}/>
-        <FoodsSlider title="Burgers" filtered={BurgerFoods}/>
-        <FoodsSlider title="Sandwichs" filtered={SandwichFoods}/>
-        <FoodsSlider title="Salads" filtered={Salads}/>
-        <FoodsSlider title="Dessets" filtered={Desserts}/>
-      </div>
-      {/* <div className='lg:px-24 px-2 grid grid-cols-3 gap-6'>
-        {fooditems.map((fooditem) => (
+      {
+        FilterButton?
+      <div className='lg:px-24 px-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
+        {tempfoodMenu.map((fooditem) => (
           <div key={fooditem.id} className='rounded-xl p-1 shadow-black hover:shadow-xl cursor-pointer'>
             <img src={fooditem.Image} alt="FoodMenu" className='rounded-xl h-60  w-full' />
             <div className='grid grid-cols-[1fr,auto]'>
@@ -66,10 +61,22 @@ const FoodItems = () => {
           </div>
         ))}
         <ToastContainer />
-        <div className={`${fooditems.length === 0 ? "block" : "hidden"} w-[50rem] justify-center items-center text-5xl text-gray-400 font-extralight`}>
+        <div className={`${tempfoodMenu.length === 0 ? "flex" : "hidden"} min-h-[30rem] justify-center items-center text-5xl text-gray-400 font-extralight`}>
           Filtered Item not found...
         </div>
-      </div> */}
+      </div>:
+       <div>
+       <FoodsSlider title="Under $1 Delivery Fees" filtered={Delivery}/>
+       <FoodsSlider title="Quick Deliveries" filtered={QuickDelivery}/>
+       <FoodsSlider title="Burgers" filtered={BurgerFoods}/>
+       <FoodsSlider title="Sandwichs" filtered={SandwichFoods}/>
+       <FoodsSlider title="Salads" filtered={Salads}/>
+       <FoodsSlider title="Dessets" filtered={Desserts}/>
+   </div>
+   
+      }
+      
+      
     </div>
   )
 }

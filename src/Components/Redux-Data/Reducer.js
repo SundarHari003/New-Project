@@ -9,6 +9,7 @@ const getTotalPrice = (foodcart) => {
     });
     return totalPrice;
 };
+
 const notify=()=>{
     toast.success("Your Food items added on Cart...", {
           position: "top-center",
@@ -34,9 +35,14 @@ const reducerAction = createSlice({
     name: "FoodItemMenu",
     initialState: {
         FoodMenu: fooditems,
+        tempfoodMenu:[],
         foodcart: [],
         tempList: {},
         totalCartAmount:0,
+        FilterButton:false,
+        DeliveryFees:7,
+        Rating:3
+        
     },
     reducers: {
         AddItemsCar: (state, action) => {
@@ -91,10 +97,23 @@ const reducerAction = createSlice({
             const idToDelete = action.payload.id;
             state.foodcart = state.foodcart.filter(item => item.id !== idToDelete);
             state.totalCartAmount=getTotalPrice(state.foodcart);
+        },
+        FilteringItems:(state,action)=>{
+            state.FilterButton=action.payload;
+            state.tempfoodMenu=state.FoodMenu;
+        },
+        FilteringCondition:(state,action)=>{
+            state.tempfoodMenu=state.FoodMenu.filter((items)=>(items.Deliveryfees<=state.DeliveryFees && items.Rating>=state.Rating));
+        },
+        DeliveryChange:(state,action)=>{
+            state.DeliveryFees=action.payload;
+        },
+        RatingChange:(state,action)=>{
+            state.Rating=action.payload;
         }
         
     }
 });
 
-export const { AddItemsCar,IncreaseFoodQuantity,DecreaseFoodQuantity, DeleteList } = reducerAction.actions;
+export const { AddItemsCar,IncreaseFoodQuantity,DecreaseFoodQuantity, DeleteList,FilteringItems,FilteringCondition,DeliveryChange,RatingChange } = reducerAction.actions;
 export default reducerAction.reducer;

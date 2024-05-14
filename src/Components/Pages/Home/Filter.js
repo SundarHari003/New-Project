@@ -3,8 +3,12 @@ import {  MdLocalOffer, MdOutlineKeyboardArrowDown } from 'react-icons/md';
 import { TiStarFullOutline } from "react-icons/ti";
 import { TbCurrencyDollar } from "react-icons/tb";
 import Dash from '../../../assests/icons/p.png';
+import {FilteringCondition,FilteringItems,RatingChange,DeliveryChange} from '../../Redux-Data/Reducer'
+import { useDispatch, useSelector } from 'react-redux';
 
 const Filter = () => {
+    const dispatch =useDispatch();
+    const {tempfilter}=useSelector((state)=>state.reducerAction)
     const[Fees,setFees]=useState(false);
     const[RatingOpen,setRatingOpen]=useState(false);
     const[Price,setPrice]=useState(false);
@@ -13,11 +17,12 @@ const Filter = () => {
     const[rest,setrest]=useState(false);
     const dropdownRef =useRef(null);
     const dropdownRef2 =useRef(null);
-    console.log(DeliveryFees);
+    
     const ChnageDeliveryFees=(event)=>{
         setDeliveryFees(event.target.value);
+        
     }
-    const ChangeRating=(event)=>{
+    const ChnageRating=(event)=>{
         setRating(event.target.value);
     }
     const OpenFees=()=>{
@@ -31,14 +36,22 @@ const Filter = () => {
     }
     
       const resetbutton=()=>{
-      
         setDeliveryFees(3);
         setRating(4.5)
         setrest(false);
-        
       }
-      const calltheDeliveryfees=(event)=>{
-        event.preventDefault();
+      const calltheDeliveryfees=()=>{
+        setFees(false);
+        dispatch(FilteringItems(true))
+        dispatch(DeliveryChange(DeliveryFees))
+        dispatch(FilteringCondition());
+        setrest(true)
+      }
+      const calltheRating=()=>{
+        setRatingOpen(false);
+        dispatch(FilteringItems(true))
+        dispatch(RatingChange(Rating))
+        dispatch(FilteringCondition());
         setrest(true)
       }
       const handleClickOutside = (event) => {
@@ -63,14 +76,14 @@ const Filter = () => {
   return (
         <div className='scrollable-container xl:px-24 lg:px-14 px-5  py-6 w-full flex overflow-y-visible overflow-x-auto items-center gap-3 scroll-bar sticky top-[7.2rem]   md:top-[7.5rem]  lg:top-[4.5rem] bg-white z-[998] '>
             <div className='relative'>
-                <div className={`text-base  font-semibold flex items-center bg-gray-200 ${DeliveryFees==7?"w-[16.7rem]":"w-[15.7rem]"} px-3 py-[0.1rem] h-[1.9rem] rounded-full cursor-pointer hover:bg-gray-50 hover:text-black transition-all duration-200 `}>
-                    <div className=' flex text-base items-center' >Delivery Fees: Under<TbCurrencyDollar size={17}/><span className='pt-[0.2rem]'>{(DeliveryFees == 7 ?"5+":DeliveryFees)}</span><span className=' w-[0.04rem] h-4 me-2 ms-2 bg-slate-400'></span></div> <MdOutlineKeyboardArrowDown size={17} onClick={OpenFees}/>
+                <div className={`text-base  font-semibold flex items-center bg-gray-200 ${DeliveryFees==7?"w-[16.7rem]":"w-[15.7rem]"} px-3 py-[0.1rem] h-[1.9rem] rounded-full cursor-pointer hover:bg-gray-50 hover:text-black transition-all duration-200 `} >
+                    <div className=' flex text-base items-center'onClick={calltheDeliveryfees}>Delivery Fees: Under<TbCurrencyDollar size={17}/><span className='pt-[0.2rem]'>{DeliveryFees==7?"5+":DeliveryFees}</span><span className=' w-[0.04rem] h-4 me-2 ms-2 bg-slate-400'></span></div> <MdOutlineKeyboardArrowDown size={17} onClick={OpenFees}/>
                 </div> 
                 {
                     (
                         Fees&&
-                        <div className=' fixed w-full min-h-screen top-0 left-0 bg-black bg-opacity-50 flex items-center justify-center z-[999]'>
-                            <form className=' px-3 pb-1 pt-5 shadow bg-white shadow-black rounded-lg  w-[25rem] space-y-2 z-10'onSubmit={calltheDeliveryfees} ref={dropdownRef}>
+                        <div className=' fixed w-full overflow-hidden min-h-screen top-0 left-0 bg-black bg-opacity-50 flex items-center justify-center z-[999]'>
+                            <form className=' px-3 pb-1 pt-5 shadow bg-white shadow-black rounded-lg  w-[25rem] space-y-2 z-10' ref={dropdownRef}>
                                 <h1 className=' font-semibold text-3xl'>Delivery Fees</h1>
                                 <p className=' text-[1rem] text-gray-500 font-semibold'>Delivery fees vary for each restaurant based on your location and other factors.</p>
                                 <div className=' text-[1rem] text-gray-500 font-semibold flex items-center'>Under <TbCurrencyDollar size={20}/><span className=' text-lg'>{(DeliveryFees==7?"5+":DeliveryFees)}</span> </div>
@@ -91,7 +104,7 @@ const Filter = () => {
                                 </div><hr/>
                                 <div className=' py-3 text-lg font-semibold flex justify-end gap-4'>
                                     <button type="button" className=' px-2 py-1'onClick={OpenFees}> Cancel</button>
-                                    <button type='submit' className=' bg-primary px-5 py-2 rounded-full text-white' >View Result</button>
+                                    <button type='button' className=' bg-primary px-5 py-2 rounded-full text-white' onClick={calltheDeliveryfees} >View Result</button>
                                 </div>
                             </form>
                         </div>
@@ -105,17 +118,17 @@ const Filter = () => {
                 <span className=' text-base'>Pickup</span>
             </div>
             <div className=' relative'>
-                <div className={` text-base font-semibold flex items-center py-[0.1rem] hover:text-black w-fit px-3 rounded-full cursor-pointer hover:bg-gray-50 transition-all duration-200 gap-1 bg-gray-200`} >
-                    Over<span className='pt-[0.2rem]'>{Rating}</span><TiStarFullOutline size={17}/><span className=' w-[0.04rem] h-4 me-2 bg-slate-400'></span> <MdOutlineKeyboardArrowDown size={17} onClick={OpenRating}/>
+                <div className={` text-base font-semibold flex items-center py-[0.1rem] hover:text-black px-3 rounded-full cursor-pointer hover:bg-gray-50 transition-all duration-200 gap-1 bg-gray-200 w-[9.5rem]`}>
+                <span className='pt-[0.2rem] flex items-center text-base' onClick={calltheRating}>Over {Rating}</span><TiStarFullOutline size={17}/><span className=' w-[0.04rem] h-4 me-2 bg-slate-400'></span> <MdOutlineKeyboardArrowDown size={17} onClick={OpenRating}/>
                 </div>
                 {
                     (
-                        RatingOpen&&
-                        <form className=' fixed px-3 pt-5 shadow bg-white shadow-black rounded-lg w-[25rem] space-y-2 z-10 'onSubmit={calltheDeliveryfees} ref={dropdownRef2} >
+                        RatingOpen&&<div className=' fixed w-full overflow-hidden min-h-screen top-0 left-0 bg-black bg-opacity-50 flex items-center justify-center z-[999]'>
+                        <form className=' fixed px-3 pt-5 shadow bg-white shadow-black rounded-lg w-[25rem] space-y-2 z-10 ' ref={dropdownRef2} >
                             <h1 className=' font-semibold text-3xl'>Rating</h1>
                             <div className=' text-[1rem] text-gray-500 font-semibold flex items-center'>Over <TbCurrencyDollar size={20}/><span className=' text-lg'>{Rating}</span> </div>
                             <div class="flex flex-col space-y-2 p-2 w-full relative">
-                                <input type="range" class="w-full" min="3" max="5" step="0.5" direction="rtl" className=' slider cursor-pointer' defaultValue={Rating} onChange={ChangeRating}/>
+                                <input type="range" class="w-full" min="3" max="5" step="0.5" direction="rtl" className=' slider cursor-pointer' defaultValue={Rating} onChange={(event)=>{ChnageRating(event)}}/>
                                 <ul class="flex justify-between w-full py-5 px-[10px]">
                                     <li class="flex justify-center relative"><span class="absolute flex text-base items-center font-semibold">3</span></li>
                                     <li class="flex justify-center relative"><span class="absolute flex text-base items-center font-semibold">3.5</span></li>
@@ -133,9 +146,9 @@ const Filter = () => {
                             </div><hr/>
                             <div className=' py-3 text-lg font-semibold flex justify-end gap-4'>
                                 <button type="button" className=' px-2 py-1'onClick={OpenRating}> Cancel</button>
-                                <button type='submit' className=' bg-primary px-5 py-2 rounded-full text-white'>View Result</button>
+                                <button type='button' className=' bg-primary px-5 py-2 rounded-full text-white'onClick={calltheRating}>View Result</button>
                             </div>
-                        </form>
+                        </form></div>
                     )
                 } 
             </div>
@@ -174,8 +187,8 @@ const Filter = () => {
                 <img src={Dash} alt="icons" width={25}/>
                 <span className=' text-base'>DashPass</span>
             </div>
-            <div className={`${rest?"block":"hidden"} flex justify-end py-2 lg:px-24 px-2`}>
-                <button className='w-fit py-1 px-2 text-base font-medium bg-gray-300 rounded-full' onClick={resetbutton}>rest</button>
+            <div className={`${rest?"block":"hidden"} flex justify-end lg:px-24 px-2`} onClick={()=>dispatch(FilteringItems(false))}>
+                <button className='w-fit  px-2 text-base font-medium bg-gray-300 rounded-full' onClick={resetbutton}>Rest</button>
             </div>
         </div>
         

@@ -78,7 +78,7 @@ const FoodCart = () => {
             <Link to="/Home" className=' bg-gray-300 font-bold text-lg md:flex items-center px-5 py-2 rounded-full gap-2 hidden'>
               <FaPlus size={20} className=' rounded-full border border-black'/><span className=' text-lg'>Add More Items</span>
             </Link>
-            <button type="submit" className=' text-lg sm:text-2xl text-white bg-primary rounded-full px-3 py-1 hover:opacity-90'>Order Now</button>
+            <Link to="/Payment" type="submit" className=' text-lg sm:text-2xl text-white bg-primary rounded-full px-3 py-1 hover:opacity-90'>Order Now</Link>
           </div>
         </div>
       }

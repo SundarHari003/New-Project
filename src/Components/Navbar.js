@@ -57,7 +57,7 @@ const Navbar = () => {
     const dropdownRef =useRef(null);
     const handleClickOutside = (event) => {
         if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-            setOpenLogin(true);
+            setOpenLogin(false);
         }
       };
     useEffect(() => {
@@ -116,7 +116,7 @@ const Navbar = () => {
         </div>
         {
             (MenuIcon&&
-                <div className={ ` bg-transparent fixed top-0 w-full z-20 bg-slate-500 transparent-back min-h-screen`}>
+                <div className={ ` bg-transparent fixed top-0 w-full z-20 bg-slate-500 transparent-back min-h-screen`} onClick={(event)=>handleClickOutside(event)} ref={dropdownRef}>
                     <nav className={` w-3/4 sm:w-2/4  md:w-2/5 lg:w-1/4 MenuNav  relative duration-300 transition-all  bg-white shadow shadow-slate-700 min-h-screen `}>
                         <div className=' px-4 py-6 '> 
                             <FaXmark size={26} onClick={OpenMenu} className=' cursor-pointer'/>
