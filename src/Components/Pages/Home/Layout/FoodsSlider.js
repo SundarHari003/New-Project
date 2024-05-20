@@ -8,6 +8,7 @@ import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
 import { ToastContainer } from 'react-toastify';
 import {AddItemsCar} from '../../../Redux-Data/Reducer'
 import { useDispatch} from 'react-redux';
+
 const FoodsSlider = ({title,filtered}) => {
 const [isBeginning, setIsBeginning] = useState(true);
   const [isEnd, setIsEnd] = useState(false);

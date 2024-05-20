@@ -27,6 +27,7 @@ const Navbar = () => {
     }
     const signs=(value)=>{
         value?setsigning(false):setsigning(true);
+        setMenuIcon(false)
     }
     const user="UserName";
     const[field,setfield]=useState(false);
@@ -67,7 +68,7 @@ const Navbar = () => {
         };
       }, []);
   return (
-    <div className=' w-full flex flex-col items-center sticky top-0 bg-white z-[9999]'>
+    <div className=' w-full flex flex-col items-center sticky top-0 bg-white z-[999]'>
         <nav className=' md:grid grid-cols-[auto,1fr] w-full lg:px-24 py-2  px-2 border-b border-b-gray-300 hidden'>
             <div className=' flex items-center gap-3' >
                 <IoMenuOutline size={26} className=' cursor-pointer' onClick={OpenMenu}/>
@@ -122,10 +123,10 @@ const Navbar = () => {
                             <FaXmark size={26} onClick={OpenMenu} className=' cursor-pointer'/>
                         </div>
                         <div>
-                            <Link to="/" className=' flex gap-5 items-end  hover:bg-slate-200 p-4 font-semibold text-xl'><AiOutlineHome size={26} className=' text-gray-800'/>Home</Link><hr/>
-                            <Link to="/" className=' flex gap-5 items-end  hover:bg-slate-200 p-4 font-semibold text-xl'><BsBagCheck size={26} className=' text-gray-800'/>Pickup</Link><hr/>
-                            <Link to="/" className=' flex gap-5 items-end  hover:bg-slate-200 p-4 font-semibold text-xl'><MdOutlineLocalOffer size={26} className=' text-gray-800 rotate-90'/>Offers</Link><hr/>
-                            <Link to="/Help" className=' flex gap-5 items-end  hover:bg-slate-200 p-4 font-semibold text-xl'><IoHelpBuoyOutline size={26} className=' text-gray-800'/>Help</Link><hr/>
+                            <Link to="/" className=' flex gap-5 items-end  hover:bg-slate-200 p-4 font-semibold text-xl'><AiOutlineHome size={26} className=' text-gray-800' onClick={OpenMenu}/>Home</Link><hr/>
+                            <Link to="/" className=' flex gap-5 items-end  hover:bg-slate-200 p-4 font-semibold text-xl' onClick={OpenMenu}><BsBagCheck size={26} className=' text-gray-800' />Pickup</Link><hr/>
+                            <Link to="/" className=' flex gap-5 items-end  hover:bg-slate-200 p-4 font-semibold text-xl' onClick={OpenMenu}><MdOutlineLocalOffer size={26} className=' text-gray-800 rotate-90'/>Offers</Link><hr/>
+                            <Link to="/Help" className=' flex gap-5 items-end  hover:bg-slate-200 p-4 font-semibold text-xl' onClick={OpenMenu}><IoHelpBuoyOutline size={26} className=' text-gray-800'/>Help</Link><hr/>
                             <div className=' flex gap-5 items-end  hover:bg-slate-200 p-4 font-semibold text-xl cursor-pointer'onClick={sign}><FaRegUserCircle size={26} className=' text-gray-800' />SignUp or SignIn</div><hr/>
                         </div>
                     </nav>

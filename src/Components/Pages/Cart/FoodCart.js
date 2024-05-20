@@ -5,6 +5,7 @@ import { MdCurrencyRupee, MdDeleteForever} from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
 import {IncreaseFoodQuantity,DecreaseFoodQuantity,DeleteList} from '../../Redux-Data/Reducer'
 import { Link } from 'react-router-dom';
+
 const FoodCart = () => {
   const {foodcart}=useSelector((state)=>state.reducerAction);
   const {totalCartAmount}=useSelector((state)=>state.reducerAction);

@@ -5,6 +5,7 @@ import HomePage from './Components/Pages/Home/HomePage';
 import HelpPage from './Components/Pages/Help/HelpPage';
 import FoodCart from './Components/Pages/Cart/FoodCart';
 import PaymentPage from './Components/Pages/Cart/PaymentPage';
+import 'react-toastify/dist/ReactToastify.css';
 function App() {
   return (
     <>
